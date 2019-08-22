@@ -1,0 +1,86 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ATR Posts by Cat\n"
+"POT-Creation-Date: 2019-07-07 16:12+0300\n"
+"PO-Revision-Date: 2019-07-07 16:13+0300\n"
+"Last-Translator: Yehuda Tiram <yehuda@atarimtr.co.il>\n"
+"Language-Team: Yehuda Tiram <yehuda@atarimtr.co.il>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
+"2 : 3);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: atr-posts-by-cat.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: includes/class-atr-posts-by-cat-select-list-widget.php:33
+msgid "ATR Posts By Cat Select Widget"
+msgstr ""
+
+#: includes/class-atr-posts-by-cat-select-list-widget.php:36
+msgid "Widget for cats list selection"
+msgstr "ווידג'ט לבחירת רשימת קטגוריות"
+
+#: includes/class-atr-posts-by-cat-select-list-widget.php:73
+msgid "ATR Categories selection"
+msgstr "בחירת קטגוריות ATR"
+
+#: includes/class-atr-posts-by-cat-select-list-widget.php:78
+msgid "Title:"
+msgstr "כותרת:"
+
+#: public/class-atr-posts-by-cat-public.php:181
+#: public/class-atr-posts-by-cat-public.php:422
+msgid "Read more..."
+msgstr "קרא עוד..."
+
+#: public/class-atr-posts-by-cat-public.php:446
+msgid ""
+"<i id=\"prev-posts\" class=\"fa fa-arrow-circle-right\" aria-hidden=\"true"
+"\"></i> Previous"
+msgstr ""
+"<i id=\"prev-posts\" class=\"fa fa-arrow-circle-right\" aria-hidden=\"true"
+"\"></i> הקודם"
+
+#: public/class-atr-posts-by-cat-public.php:447
+msgid ""
+"<i id=\"prev-posts\" class=\"fa fa-arrow-circle-left\" aria-hidden=\"true"
+"\"></i> Next"
+msgstr ""
+"<i id=\"prev-posts\" class=\"fa fa-arrow-circle-left\" aria-hidden=\"true"
+"\"></i> הבא"
+
+#. Plugin Name of the plugin/theme
+msgid "ATR Posts by Cat"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://atarimtr.com"
+msgstr "http://atarimtr.com"
+
+#. Description of the plugin/theme
+msgid ""
+"List posts by category. Use [posts-list posts_per_page=\"2\" "
+"terms='4,15,11,21,18,29,25' excerpt=0 more_info=0 pager='next_prev_arr' || "
+"'next_prev_numbered' || 'next_prev' ] [posts-list posts_per_page=\"2\" "
+"terms='117' full_content=1  more_info=0] [posts-list posts_per_page=\"2\" "
+"terms='117' excerpt=0 more_info=0 pager='next_prev_arr' ]"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Yehuda Tiram"
+msgstr "יהודה תירם"
+
+#. Author URI of the plugin/theme
+#, fuzzy
+msgid "http://www.atarimtr.com/"
+msgstr "http://www.atarimtr.com/"
