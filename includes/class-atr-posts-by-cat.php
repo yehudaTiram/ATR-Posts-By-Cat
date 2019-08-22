@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       http://www.atarimtr.com/
+ * @link       http://atarimtr.co.il/
  * @since      1.0.0
  *
  * @package    Atr_Posts_By_Cat

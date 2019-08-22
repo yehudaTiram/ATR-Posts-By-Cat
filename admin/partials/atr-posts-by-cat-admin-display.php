@@ -5,7 +5,7 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       http://www.atarimtr.com/
+ * @link       http://atarimtr.co.il/
  * @since      1.0.0
  *
  * @package    Atr_Posts_By_Cat

@@ -5,7 +5,7 @@
  *
  * A class definition that includes the custom category walker
  *
- * @link       http://www.atarimtr.com/
+ * @link       http://atarimtr.co.il/
  * @since      1.0.0
  *
  * @package    Atr_Posts_By_Cat

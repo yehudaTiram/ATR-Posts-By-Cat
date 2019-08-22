@@ -4,17 +4,20 @@
  * The plugin bootstrap file
  *
  * 
- * @link              http://www.atarimtr.com/
+ * @link              http://atarimtr.co.il/
  * @since             1.0.0
  * @package           Atr_Posts_By_Cat
  *
  * @wordpress-plugin
  * Plugin Name:       ATR Posts by Cat
- * Plugin URI:        http://atarimtr.com
- * Description:       List posts by category. Use [posts-list posts_per_page="2" terms='4,15,11,21,18,29,25' excerpt=0 more_info=0 pager='next_prev_arr' || 'next_prev_numbered' || 'next_prev' ] [posts-list posts_per_page="2" terms='117' full_content=1  more_info=0] [posts-list posts_per_page="2" terms='117' excerpt=0 more_info=0 pager='next_prev_arr' ]
+ * Plugin URI:        http://atarimtr.co.il
+ * Description:       List posts by category. Use 
+ * 					  [posts-list posts_per_page="2" terms='4,15,11,21,18,29,25' excerpt=0 more_info=0 pager='next_prev_arr' || 'next_prev_numbered' || 'next_prev' ]
+ * 					  [posts-list posts_per_page="2" terms='117' full_content=1  more_info=0]
+ *     				  [posts-list posts_per_page="2" terms='117' excerpt=0 more_info=0 pager='next_prev_arr' ]
  * Version:           1.0.0
  * Author:            Yehuda Tiram
- * Author URI:        http://www.atarimtr.com/
+ * Author URI:        http://www.atarimtr.co.il/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       atr-posts-by-cat

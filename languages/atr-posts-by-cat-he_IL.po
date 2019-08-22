@@ -64,8 +64,8 @@ msgid "ATR Posts by Cat"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://atarimtr.com"
-msgstr "http://atarimtr.com"
+msgid "http://atarimtr.co.il"
+msgstr "http://atarimtr.co.il"
 
 #. Description of the plugin/theme
 msgid ""
@@ -82,5 +82,5 @@ msgstr "יהודה תירם"
 
 #. Author URI of the plugin/theme
 #, fuzzy
-msgid "http://www.atarimtr.com/"
-msgstr "http://www.atarimtr.com/"
+msgid "http://atarimtr.co.il/"
+msgstr "http://atarimtr.co.il/"

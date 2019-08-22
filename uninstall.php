@@ -19,7 +19,7 @@
  * For more information, see the following discussion:
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
- * @link       http://www.atarimtr.com/
+ * @link       http://atarimtr.co.il/
  * @since      1.0.0
  *
  * @package    Atr_Posts_By_Cat
