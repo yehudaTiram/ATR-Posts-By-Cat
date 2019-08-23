@@ -48,7 +48,7 @@ class Atr_Posts_By_Cat_Public
      * @access   private
      * @var      bool    $load_posts_by_selected_categories_sc_active.
      */
-    public $load_posts_by_selected_categories_sc_active = false;
+    public $load_posts_by_selected_categories_sc_active = false; // Not used
 
     /**
      * Initialize the class and set its properties.
@@ -66,7 +66,7 @@ class Atr_Posts_By_Cat_Public
     }
 
     // Add actions only if the short
-    public function add_shortcode_scripts()
+    public function add_shortcode_scripts() // Not used
     {
         if (!$this->addScript) {
             return false;
@@ -75,7 +75,7 @@ class Atr_Posts_By_Cat_Public
         wp_enqueue_script('shortcode-js', get_stylesheet_directory_uri() . '/js/shortcode.js', false);
     }
 
-    public function my_post_queries($query)
+    public function my_post_queries($query) // Not used
     {
         // do not alter the query on wp-admin pages and only alter it if it's the main query
 
@@ -145,8 +145,7 @@ class Atr_Posts_By_Cat_Public
         if (is_main_query()) {
             echo '<h2>is_main_query</h2>';
         }
-        var_dump(get_query_var('paged'));
-        var_dump(get_query_var('page'));
+
         if (get_query_var('paged') > 0) {
             echo '<nav id="nav-posts" class="blog-pages-nav">';
             echo '<div class="next">';
@@ -209,7 +208,7 @@ class Atr_Posts_By_Cat_Public
      *
      * @since    1.0.0
      */
-    public function loop_args()
+    public function loop_args() // Not used
     {
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
         global $cats_posts_selected;
@@ -261,7 +260,6 @@ class Atr_Posts_By_Cat_Public
                     ),
                 ),
             );
-            //var_dump($args);
         }
 
         return $args;
@@ -272,7 +270,7 @@ class Atr_Posts_By_Cat_Public
      *
      * @since    1.0.0
      */
-    public function set_the_loop($wp_query_passed)
+    public function set_the_loop($wp_query_passed) // Not used
     {
         $returned_posts = '';
         if ($wp_query_passed->have_posts()) {
@@ -354,9 +352,6 @@ class Atr_Posts_By_Cat_Public
         return $pagination_output;
     }
 
-/* TEST */
-
-/* TEST */
     public function load_posts_by_selected_categories_sc($atts, $content = null)
     {
 
@@ -368,9 +363,18 @@ class Atr_Posts_By_Cat_Public
             'excerpt' => 1,
             'more_info' => 1,
             'pager' => 'next_prev',
+            'atr-posts-cat-template' => '',
+            'show-title' => '1',
+            'link-title' => '1', 
+            'show-thumbnail' => '1',
+            'link-thumbnail' => '1',
+            'show-date'     => '0',
+
 
         ), $atts);
+
         if (get_query_var('paged')) {$paged = get_query_var('paged');} elseif (get_query_var('page')) {$paged = get_query_var('page');} else { $paged = 1;}
+
         $args = array(
             'post_type' => 'post',
             'posts_per_page' => wp_kses_post($pull_cats_atts['posts_per_page']),
@@ -384,80 +388,115 @@ class Atr_Posts_By_Cat_Public
             ),
         );
         $the_query = new WP_Query($args);
-        //$the_query = new WP_Query('posts_per_page=2&paged=' . $paged, array( 'cat' => '4,15') );
+        
         $my_posts = '';
 
-        if ($the_query->have_posts()) {
-            //global $my_posts;
-            ob_start();
-            $my_posts .= '<div class="atr-posts-by-cat-list-wrap"><!-- 393 -->';
-            $my_posts .= '<ul class="atr-posts-by-cat-list">';
-            while ($the_query->have_posts()) {
-                $the_query->the_post();
-				$id = get_the_ID();
-                
-                $my_posts .= '<li><h2 class="blog-page-post-title"><a class="blog-page-post-title" href="';
-                $my_posts .= get_the_permalink();
-                $my_posts .= '">';
-                $my_posts .= get_the_title();
-                $my_posts .= '</a> </h2>';
+        if ($the_query->have_posts()) {            
 
-
-
-                $my_posts .= '<a class="atr-posts-by-cat-post-thumbnail" href="';
-                $my_posts .= get_the_permalink();
-                $my_posts .= '">';
-                $my_posts .= get_the_post_thumbnail( $id, 'thumbnail' );
-                $my_posts .= '</a><div class="atr-posts-by-cat-post-content-wrap"><!-- 411 -->';
-
-                if (wp_kses_post($pull_cats_atts['full_content']) == 1) {
-                    $my_posts .= get_the_content();
-                } else {
-                    (wp_kses_post($pull_cats_atts['excerpt']) == 1) ? $my_posts .= get_the_excerpt() : $my_posts .= '';
-                }
-                if (wp_kses_post($pull_cats_atts['more_info']) == 1) {
-                    $my_posts .= '<a class="blog-page-more-info" href="';
+            if ( empty(wp_kses_post($pull_cats_atts['atr-posts-cat-template']) ) ){
+               ob_start(); 
+                $my_posts .= '<div class="atr-posts-by-cat-list-wrap"><!-- 393 -->';
+                $my_posts .= '<ul class="atr-posts-by-cat-list">';
+                while ($the_query->have_posts()) {
+                    $the_query->the_post();
+                    $id = get_the_ID();
+                    
+                    $my_posts .= '<li><h2 class="blog-page-post-title"><a class="blog-page-post-title" href="';
                     $my_posts .= get_the_permalink();
                     $my_posts .= '">';
-                    $my_posts .= __('Read more...', 'atr-posts-by-cat');
-                    $my_posts .= '</a>';
-                }                
-                $my_posts .= '</div><!-- 425 -->';
+                    $my_posts .= get_the_title();
+                    $my_posts .= '</a> </h2>';
 
-                $my_posts .= '</li>';
-            }
-            $my_posts .= '</ul>';
-            if (wp_kses_post($pull_cats_atts['pager']) == 'next_prev_numbered') {
-                $my_posts .= '<nav id="nav-posts" class="blog-pages-nav">';
-                $big = 999999999; // need an unlikely integer
-                $my_posts .= paginate_links(array(
-                    'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                    'before_page_number' => '<span class="single-page-link">',
-                    'format' => '?paged=%#%',
-                    'after_page_number' => '</span>',
-                    'current' => max(1, get_query_var('paged')),
-                    'total' => $the_query->max_num_pages,                     
-                ));
-                $my_posts .= '</nav><!-- 441 -->';
-            } elseif (wp_kses_post($pull_cats_atts['pager']) == 'next_prev_arr') {
-                $GLOBALS['wp_query'] = $the_query;
-                $pagination = get_the_posts_pagination(array(
-                    'mid_size' => 2,
-                    'prev_text' => __('<i id="prev-posts" class="fa fa-arrow-circle-right" aria-hidden="true"></i> Previous', 'atr-posts-by-cat'),
-                    'next_text' => __('<i id="prev-posts" class="fa fa-arrow-circle-left" aria-hidden="true"></i> Next', 'atr-posts-by-cat'),
-                ));
-                $my_posts .= '<nav id="nav-posts" class="blog-pages-nav">';
-                $my_posts .= $pagination;
-                $my_posts .= '</nav><!-- 451 -->';
-            } else {
-                $my_posts .= $this->set_pagination($the_query, 'Next', 'Previous');
+
+
+                    $my_posts .= '<a class="atr-posts-by-cat-post-thumbnail" href="';
+                    $my_posts .= get_the_permalink();
+                    $my_posts .= '">';
+                    $my_posts .= get_the_post_thumbnail( $id, 'thumbnail' );
+                    $my_posts .= '</a><div class="atr-posts-by-cat-post-content-wrap"><!-- 411 -->';
+
+                    if (wp_kses_post($pull_cats_atts['full_content']) == 1) {
+                        $my_posts .= get_the_content();
+                    } else {
+                        (wp_kses_post($pull_cats_atts['excerpt']) == 1) ? $my_posts .= get_the_excerpt() : $my_posts .= '';
+                    }
+                    if (wp_kses_post($pull_cats_atts['more_info']) == 1) {
+                        $my_posts .= '<a class="blog-page-more-info" href="';
+                        $my_posts .= get_the_permalink();
+                        $my_posts .= '">';
+                        $my_posts .= __('Read more...', 'atr-posts-by-cat');
+                        $my_posts .= '</a>';
+                    }                
+                    $my_posts .= '</div><!-- 425 -->';
+
+                    $my_posts .= '</li>';
+                }
+                $my_posts .= '</ul>';
+                if (wp_kses_post($pull_cats_atts['pager']) == 'next_prev_numbered') {
+                    $my_posts .= '<nav id="nav-posts" class="blog-pages-nav">';
+                    $big = 999999999; // need an unlikely integer
+                    $my_posts .= paginate_links(array(
+                        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                        'before_page_number' => '<span class="single-page-link">',
+                        'format' => '?paged=%#%',
+                        'after_page_number' => '</span>',
+                        'current' => max(1, get_query_var('paged')),
+                        'total' => $the_query->max_num_pages,                     
+                    ));
+                    $my_posts .= '</nav><!-- 441 -->';
+                } elseif (wp_kses_post($pull_cats_atts['pager']) == 'next_prev_arr') {
+                    $GLOBALS['wp_query'] = $the_query;
+                    $pagination = get_the_posts_pagination(array(
+                        'mid_size' => 2,
+                        'prev_text' => __('<i id="prev-posts" class="fa fa-arrow-circle-right" aria-hidden="true"></i> Previous', 'atr-posts-by-cat'),
+                        'next_text' => __('<i id="prev-posts" class="fa fa-arrow-circle-left" aria-hidden="true"></i> Next', 'atr-posts-by-cat'),
+                    ));
+                    $my_posts .= '<nav id="nav-posts" class="blog-pages-nav">';
+                    $my_posts .= $pagination;
+                    $my_posts .= '</nav><!-- 451 -->';
+                } else {
+                    $my_posts .= $this->set_pagination($the_query, 'Next', 'Previous');
+                }
+
+                $my_posts .= '</div><!-- 456 -->';
+                ob_end_clean();
+             /* Restore original Post Data */
+             wp_reset_postdata();               
             }
 
-            $my_posts .= '</div><!-- 456 -->';
-            ob_end_clean();
-            //var_dump($the_query);
-            /* Restore original Post Data */
-            wp_reset_postdata();
+            else{ // We load a template file for the posts display
+
+                ob_start();
+                $templates = new Atr_Posts_By_Cat_Template_Loader();
+
+                $data = array(
+                    'loop'              => $the_query,
+                    'atr_posts_cat_template'    => wp_kses_post($pull_cats_atts['atr-posts-cat-template']),
+                    'full_content'              => wp_kses_post($pull_cats_atts['full_content']),
+                    'excerpt'                   => wp_kses_post($pull_cats_atts['excerpt']),
+                    'more_info'                 => wp_kses_post($pull_cats_atts['more_info']),
+                    'show_title'                => wp_kses_post($pull_cats_atts['show-title']),
+                    'link_title'                => wp_kses_post($pull_cats_atts['link-title']),
+                    'show_thumbnail'            => wp_kses_post($pull_cats_atts['show-thumbnail']),
+                    'link_thumbnail'            => wp_kses_post($pull_cats_atts['link-thumbnail']),
+                    'pager'                     => wp_kses_post($pull_cats_atts['pager']),
+                    'show_date'                 => wp_kses_post($pull_cats_atts['show-date']),
+        
+        
+                ); // Pass this variable to the template
+        
+                $passed_data_values_arr = wp_kses_post($pull_cats_atts['atr-posts-cat-template']) . '_values';
+                $passed_data_values_arr = preg_replace("/[\-]/", "_", $passed_data_values_arr );
+                $templates
+                    ->set_template_data($data, $passed_data_values_arr)
+                    ->get_template_part('content', wp_kses_post($pull_cats_atts['atr-posts-cat-template']) . '-template');     
+
+                    return ob_get_clean();          
+            }
+
+
+            
+
         } else {
             $my_posts .= 'no posts found';
         }

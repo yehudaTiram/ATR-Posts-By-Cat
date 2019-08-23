@@ -139,7 +139,20 @@ class Atr_Posts_By_Cat {
 		 * The Atr_Posts_By_Cat_list_Walker for user categoriesd selection in the public-facing
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-atr-posts-by-cat-select-list-widget.php';		
+
+		/**
+		 * Class that loads plugin template loader. Allows loading template parts with fallback. 
+		 * Used here to switch the front end view and loading different js code as necessary.
+		 */
+		if ( ! class_exists( 'Gamajo_Template_Loader' ) ) {	
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-gamajo-template-loader.php'; 
+		}
+		
 				
+		/**
+		 * Custom class to utilize class-gamajo-template-loader.php
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-atr-posts-by-cat-template-loader.php'; 
 		
 		$this->loader = new Atr_Posts_By_Cat_Loader();
 
