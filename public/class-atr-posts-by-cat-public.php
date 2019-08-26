@@ -356,9 +356,10 @@ class Atr_Posts_By_Cat_Public
     {
 
         $pull_cats_atts = shortcode_atts(array(
+            'post-type' => 'post',
             'taxonomy' => 'category',
             'posts_per_page' => -1,
-            'terms' => '1',
+            'terms' => '-1',
             'full_content' => -1,
             'excerpt' => 1,
             'more_info' => 1,
@@ -375,18 +376,37 @@ class Atr_Posts_By_Cat_Public
 
         if (get_query_var('paged')) {$paged = get_query_var('paged');} elseif (get_query_var('page')) {$paged = get_query_var('page');} else { $paged = 1;}
 
+        $termsIDs = [];
+        
+        if ( wp_kses_post($pull_cats_atts['terms']) == -1 ){
+            $terms = get_terms( array( 'taxonomy' => wp_kses_post($pull_cats_atts['taxonomy']) ) );
+
+            if ( ! empty($terms)){
+                foreach ( $terms as $term ) {                              
+                    foreach ( $term as $key => $value ) {
+                        if ( $key == 'term_id'){
+                            array_push($termsIDs, $value );
+                        }
+                    }
+                }            
+            }
+        }else{
+            $termsIDs = explode(',', wp_kses_post($pull_cats_atts['terms']));
+        }
+
         $args = array(
-            'post_type' => 'post',
+            'post_type' => wp_kses_post($pull_cats_atts['post-type']),
             'posts_per_page' => wp_kses_post($pull_cats_atts['posts_per_page']),
             'paged' => $paged,
             'tax_query' => array(
                 array(
-                    'taxonomy' => 'category',
+                    'taxonomy' => wp_kses_post($pull_cats_atts['taxonomy']),
                     'field' => 'term_id',
-                    'terms' => explode(',', wp_kses_post($pull_cats_atts['terms'])),
+                    'terms' => $termsIDs,
                 ),
             ),
         );
+
         $the_query = new WP_Query($args);
         
         $my_posts = '';
@@ -484,14 +504,21 @@ class Atr_Posts_By_Cat_Public
         
         
                 ); // Pass this variable to the template
-        
-                $passed_data_values_arr = wp_kses_post($pull_cats_atts['atr-posts-cat-template']) . '_values';
-                $passed_data_values_arr = preg_replace("/[\-]/", "_", $passed_data_values_arr );
-                $templates
-                    ->set_template_data($data, $passed_data_values_arr)
-                    ->get_template_part('content', wp_kses_post($pull_cats_atts['atr-posts-cat-template']) . '-template');     
 
-                    return ob_get_clean();          
+                echo '<div class="row atr-posts-by-cat-list-cards">';
+                while ($the_query->have_posts()) {
+                    $the_query->the_post();
+                    $id = get_the_ID();
+                    $passed_data_values_arr = wp_kses_post($pull_cats_atts['atr-posts-cat-template']) . '_values';
+                    $passed_data_values_arr = preg_replace("/[\-]/", "_", $passed_data_values_arr );
+                    $templates
+                        ->set_template_data($data, $passed_data_values_arr)
+                        ->get_template_part('content', wp_kses_post($pull_cats_atts['atr-posts-cat-template']) . '-template');    
+                }
+                echo '</div>';
+
+                    $output = ob_get_clean();
+                    return $output;        
             }
 
 

@@ -15,7 +15,13 @@
  * 					  [posts-list posts_per_page="2" terms='4,15,11,21,18,29,25' excerpt=0 more_info=0 pager='next_prev_arr' || 'next_prev_numbered' || 'next_prev' ]
  * 					  [posts-list posts_per_page="2" terms='117' full_content=1  more_info=0]
  *     				  [posts-list posts_per_page="2" terms='117' excerpt=0 more_info=0 pager='next_prev_arr' ]
- * 
+ * 					  See more in the wiki
+ * 					  You can use custom templates to display posts.  The option atr-posts-cat-template="cards" will use the file content-cards-template.php (a bootstrap card layout).  					  			  
+ * 					  [posts-list posts_per_page="10" terms="11" pager="next_prev_numbered"  atr-posts-cat-template="cards" more_info=1 show-date=1 ]
+ * 					  
+ * 					  You can select another post type to show, like products
+ * 					  [posts-list post_type="product " posts_per_page="10" terms="11" pager="next_prev_numbered"  atr-posts-cat-template="cards" more_info=1 show-date=1 ]	
+ * 						
  * 					  [cats-list] is not for use at the moment.
  * 
  * Version:           1.0.0
