@@ -36,31 +36,34 @@
 $card_posts = '';
 
 ?>
-<div class="card col-12 col-md-4" > 
-<a class="atr-posts-by-cat-post-thumbnail" href="<?php the_permalink(); ?>"><?php the_post_thumbnail( $id, 'thumbnail' ); ?></a>
-<div class="card-body">
-<h2 class="blog-page-post-title"><a class="blog-page-post-title" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-<?php
-	if( $show_date == 1 ){ 
-		?>
-			<h6>
-			<?php the_date(); ?>
-			</h6>
+<div class="col-md-4">
+	<div class="card mb-4 box-shadow" > 
+	<a class="atr-posts-by-cat-post-thumbnail" href="<?php the_permalink(); ?>"><?php the_post_thumbnail( $id, 'thumbnail' ); ?></a>
+	<div class="card-body">
+	<h4 class="blog-page-post-title"><a class="blog-page-post-title" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 	<?php
-	}
-	if ( $full_content == 1) {
-		the_content();
-	} else {
-		( $excerpt == 1) ? the_excerpt() : '';
-	}
-	if ( $more_info == '1') { 
+		if( $show_date == 1 ){ 
+			?>
+				<h6>
+				<?php the_date(); ?>
+				</h6>
+		<?php
+		}
+		if ( $full_content == 1) {
+			the_content();
+		} else {
+			( $excerpt == 1) ? the_excerpt() : '';
+		}
+		if ( $more_info == '1') { 
+			?>
+			<a href="<?php  the_permalink(); ?>" class="btn btn-outline-secondary btn-sm"><?php  echo __('Read more...', 'atr-posts-by-cat'); ?></a>
+			<?php 
+		} 		
 		?>
-		<a href="<?php  the_permalink(); ?>" class="btn btn-primary"><?php  echo __('Read more...', 'atr-posts-by-cat'); ?></a>
-		<?php 
-	} 		
-	?>
-	</div>
-	</div>
+		</div>
+		</div>
+</div>
+
 <?php
 	 
 /*************** */
