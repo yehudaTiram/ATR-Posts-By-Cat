@@ -36,10 +36,10 @@
 $card_posts = '';
 
 ?>
-<div class="col-md-4">
+<div class="col-md-4 row-eq-height" style="align-items: stretch;display: flex;">
 	<div class="card mb-4 box-shadow" > 
 	<a class="atr-posts-by-cat-post-thumbnail" href="<?php the_permalink(); ?>"><?php the_post_thumbnail( $id, 'thumbnail' ); ?></a>
-	<div class="card-body">
+	<div class="card-body" style="align-items: flex-end; display: flex;">
 	<h4 class="blog-page-post-title"><a class="blog-page-post-title" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 	<?php
 		if( $show_date == 1 ){ 

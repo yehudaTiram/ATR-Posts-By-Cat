@@ -398,6 +398,8 @@ class Atr_Posts_By_Cat_Public
             'post_type' => wp_kses_post($pull_cats_atts['post-type']),
             'posts_per_page' => wp_kses_post($pull_cats_atts['posts_per_page']),
             'paged' => $paged,
+            'orderby' => 'date',
+            'order'   => 'DESC',
             'tax_query' => array(
                 array(
                     'taxonomy' => wp_kses_post($pull_cats_atts['taxonomy']),
@@ -427,7 +429,11 @@ class Atr_Posts_By_Cat_Public
                     $my_posts .= get_the_title();
                     $my_posts .= '</a> </h2>';
 
-
+                    if( wp_kses_post($pull_cats_atts['show-date']) == 1 ){ 
+                        $my_posts .= '<h6>';
+                        $my_posts .= get_the_date(); 
+                        $my_posts .= '</h6>';                
+                    }
 
                     $my_posts .= '<a class="atr-posts-by-cat-post-thumbnail" href="';
                     $my_posts .= get_the_permalink();
