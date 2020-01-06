@@ -54,3 +54,18 @@ ul.atr-posts-by-cat-list li {
         padding: 0;
     }    
 }
+
+#ma-kore.atr-posts-by-cat-list-wrap { 
+  height:500px;
+  overflow:hidden;
+}
+#ma-kore.atr-posts-by-cat-list-wrap .mask {
+  position: relative;
+  left: 0px;
+  top: 10px;
+  height:450px;
+  overflow: hidden;
+}
+#ma-kore.atr-posts-by-cat-list-wrap ul {
+  position: relative;
+}

@@ -118,6 +118,11 @@ class Atr_Posts_By_Cat {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-atr-posts-by-cat-admin.php';
 
 		/**
+		 * The class responsible for settings.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-atr-posts-by-cat-admin-settings.php';		
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -194,7 +199,11 @@ class Atr_Posts_By_Cat {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		
-		
+		$plugin_settings = new Atr_Posts_By_Cat_Admin_Settings( $this->get_plugin_name(), $this->get_version() );
+        $this->loader->add_action('admin_init', $plugin_settings, 'init');
+        $this->loader->add_action('admin_menu', $plugin_settings, 'add_menu_item');
+        $plugin_basename = $this->plugin_name . '/' . 'wp-ticker-content-and-products.php';
+        $this->loader->add_filter('plugin_action_links_' . $plugin_basename, $plugin_settings, 'add_action_links');	
 		
 
 	}
@@ -213,22 +222,12 @@ class Atr_Posts_By_Cat {
 		/**
 		 * Next to loads cancelled. CSS loads from theme. JS is empty anyway
 		 */
-		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		
 		add_shortcode( 'cats-list', array( $plugin_public, 'list_categories_sc' ) );
 		add_shortcode( 'posts-list', array( $plugin_public, 'load_posts_by_selected_categories_sc' ) );
 		add_shortcode('list', array( $plugin_public, 'sc_liste' ));	
-		
-
-		// $this->loader->add_action( 'admin_footer', $plugin_public, 'load_posts_by_selected_categories_javascript' ); 
-		// $this->loader->add_action( 'wp_footer', $plugin_public, 'load_posts_by_selected_categories_javascript' ); 
-		// $this->loader->add_action( 'wp_ajax_load_posts_by_selected_categories', $plugin_public, 'load_posts_by_selected_categories_callback' );
-		// $this->loader->add_action( 'wp_ajax_nopriv_load_posts_by_selected_categories', $plugin_public, 'load_posts_by_selected_categories_callback' );	
-	
-//$this->loader->add_action( 'the_content', $plugin_public, 'load_posts_by_selected_categories' ); 	
-//apply_filters('the_content','some content here')		
-	
 			
 	}
 
