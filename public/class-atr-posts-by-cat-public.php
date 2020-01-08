@@ -74,7 +74,8 @@ class Atr_Posts_By_Cat_Public
             'show-thumbnail' => '1',
             'link-thumbnail' => '1',
             'show-date'     => '0',
-            'wrpper-id'     => '',
+            'wrapper-id'     => '',
+            'make-ticker'   => 'no',
 
 
         ), $atts);
@@ -117,7 +118,9 @@ class Atr_Posts_By_Cat_Public
         $the_query = new WP_Query($args);
         
         $my_posts = '';
-        $unique_id = wp_kses_post($pull_cats_atts['wrpper-id']) ? ' id="' . wp_kses_post($pull_cats_atts['wrpper-id']) . '" ' : ''; 
+        $unique_id = wp_kses_post($pull_cats_atts['wrapper-id']) ? ' id="' . wp_kses_post($pull_cats_atts['wrapper-id']) . '" ' : ''; 
+        $make_ticker = wp_kses_post($pull_cats_atts['make-ticker']) ? wp_kses_post($pull_cats_atts['make-ticker']) : 'no';
+        
         if ($the_query->have_posts()) {            
 
             if ( empty(wp_kses_post($pull_cats_atts['atr-posts-cat-template']) ) ){
@@ -195,6 +198,7 @@ class Atr_Posts_By_Cat_Public
                 }
 
                 $my_posts .= '</div><!-- 456 -->';
+                
                 ob_end_clean();
              /* Restore original Post Data */
              wp_reset_postdata();               
@@ -217,7 +221,7 @@ class Atr_Posts_By_Cat_Public
                     'link_thumbnail'            => wp_kses_post($pull_cats_atts['link-thumbnail']),
                     'pager'                     => wp_kses_post($pull_cats_atts['pager']),
                     'show_date'                 => wp_kses_post($pull_cats_atts['show-date']),
-                    'wrpper_id'                 => wp_kses_post($pull_cats_atts['wrpper-id']),
+                    'wrapper_id'                 => wp_kses_post($pull_cats_atts['wrapper-id']),
         
         
                 ); // Pass this variable to the template
@@ -237,15 +241,14 @@ class Atr_Posts_By_Cat_Public
                     $output = ob_get_clean();
                     return $output;        
             }
-
-
-            
-
         } else {
             $my_posts .= 'no posts found';
         }
-
-        //return $this->load_posts_by_selected_categories($the_query);
+        if ( $make_ticker == 'yes' ){
+            wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/atr-posts-by-cat-public.css', array(), mt_rand(10, 1000), 'all');
+            wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/atr-posts-by-cat-public.js', array( 'jquery' ), mt_rand(10, 1000), false );
+            
+        }
 
         return $my_posts;
     }
@@ -345,7 +348,7 @@ class Atr_Posts_By_Cat_Public
      */
     public function enqueue_styles()
     {
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/atr-posts-by-cat-public.css', array(), mt_rand(10, 1000), 'all');
+        //wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/atr-posts-by-cat-public.css', array(), mt_rand(10, 1000), 'all');
     }
 
     /**
@@ -356,7 +359,7 @@ class Atr_Posts_By_Cat_Public
     public function enqueue_scripts()
     {
         // Next line removed since we want to load js with ajax. See next
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/atr-posts-by-cat-public.js', array( 'jquery' ), mt_rand(10, 1000), false );
+        //wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/atr-posts-by-cat-public.js', array( 'jquery' ), mt_rand(10, 1000), false );
 
         // Load ajax for frontend
         // wp_register_script('admin_ajax_front', plugin_dir_url(__FILE__) . 'js/atr-posts-by-cat-public.js', array('jquery'), mt_rand(10, 1000), false);
@@ -369,5 +372,25 @@ class Atr_Posts_By_Cat_Public
     }
 
 
+    /**
+     * Options getter
+     * @return array Options, either saved or default ones.
+     */
+    private function get_options()
+    {
+        $options = get_option($this->plugin_name);
+        if (!$options && is_array($this->settings)) {
+            $options = array();
+            foreach ($this->settings as $section => $data) {
+                foreach ($data['fields'] as $field) {
+                    $options[$field['id']] = $field['default'];
+                }
+            }
+
+            add_option($this->plugin_name, $options);
+        }
+
+        return $options;
+    }
 
 }

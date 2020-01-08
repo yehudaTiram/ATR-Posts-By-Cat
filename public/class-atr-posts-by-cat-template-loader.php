@@ -7,13 +7,13 @@
  * @link       http://www.atarimtr.com/
  * @since      1.0.0
  *
- * @package    Wp_Ticker_Content_And_Products
- * @subpackage Wp_Ticker_Content_And_Products/includes
+ * @package    Atr_Posts_By_Cat
+ * @subpackage Atr_Posts_By_Cat/includes
  * @author     Yehuda Tiram <yehuda@atarimtr.co.il>
  */
  
 /**
- * Template loader for Wp_Ticker_Content_And_Products Plugin.
+ * Template loader for Atr_Posts_By_Cat Plugin.
  *
  * Only need to specify class properties here.
  *

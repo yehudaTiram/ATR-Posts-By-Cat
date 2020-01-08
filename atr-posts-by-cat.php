@@ -18,7 +18,7 @@
  * 					  See more in the wiki
  * 					  You can use custom templates to display posts.  The option atr-posts-cat-template="cards" will use the file content-cards-template.php (a bootstrap card layout).  					  			  
  * 					  [posts-list posts_per_page="10" terms="11" pager="next_prev_numbered"  atr-posts-cat-template="cards" more_info=1 show-date=1 ]
- * 					  
+ * 					  [posts-list  wrapper-id="ma-kore" make-ticker="yes"]  makes the list a ticker. must define both to work 
  * 					  You can select another post type to show, like products
  * 					  [posts-list post_type="product " posts_per_page="10" terms="11" pager="next_prev_numbered"  atr-posts-cat-template="cards" more_info=1 show-date=1 ]	
  * 						

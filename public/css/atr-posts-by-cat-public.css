@@ -11,7 +11,7 @@ ul.atr-posts-by-cat-list li {
     list-style: none; 
     display: inline-block;
     vertical-align: top;
-    padding: 0 0 0 1%;
+    padding:3%;
 }
 .atr-posts-by-cat-list-wrap nav#nav-posts {
     width: 100%;

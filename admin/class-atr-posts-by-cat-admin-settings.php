@@ -236,9 +236,8 @@ class Atr_Posts_By_Cat_Admin_Settings {
 				?>
 				<div class="atr-posts-by-cat-docs" style="background: #fff;padding: 30px;">
 					<div>
-					<h1>Posts tickers and other display manipulations.</h1>
-					<h2> Shortcode for horizontal ticker</h2>
-                        <p>To list posts by category. Use <br />
+					<h1><?php _e('Posts by categories shortcode options', $this->textdomain);?></h1>
+                        <p><?php _e('To list posts by category. Use ( || means OR (select one))', $this->textdomain);?> <br />
                         [posts-list posts_per_page="2" terms='4,15,11,21,18,29,25' excerpt=0 more_info=0 pager='next_prev_arr' || 'next_prev_numbered' || 'next_prev' ]<br />
                         [posts-list posts_per_page="2" terms='117' full_content=1  more_info=0]<br />
                         [posts-list posts_per_page="2" terms='117' excerpt=0 more_info=0 pager='next_prev_arr' ]<br />
@@ -248,7 +247,7 @@ class Atr_Posts_By_Cat_Admin_Settings {
                         
                         You can select another post type to show, like products<br />
                         [posts-list post_type="product " posts_per_page="10" terms="11" pager="next_prev_numbered"  atr-posts-cat-template="cards" more_info=1 show-date=1 ]	<br />
-                            
+                        [posts-list  wrapper-id="ma-kore" make-ticker="yes"]  makes the list a ticker. must define both to work    <br />
                         [cats-list] is not for use at the moment.</p>
                         <p><br />
                         <strong><underline>shortcode atts</underline></strong><br />
@@ -266,7 +265,8 @@ class Atr_Posts_By_Cat_Admin_Settings {
                         show-thumbnail (default 1)<br />
                         link-thumbnail (default 1)<br />
                         show-date (default0)<br />
-                        wrpper-id (default empty<br />
+                        wrapper-id (default empty)<br />
+                        make-ticker  (default 'no')<br />
                         </p>
 					</div>					
 				 </div>
@@ -362,7 +362,7 @@ class Atr_Posts_By_Cat_Admin_Settings {
         // If you don't need tabbed navigation just strip out everything between the <!-- Tab navigation --> tags.
         ?>
 	  <div class="wrap" id="<?php echo $this->plugin_name; ?>">
-	  	<h2><?php _e('ATR Side Drawer & Popup Settings', $this->textdomain);?></h2>
+	  	<h2><?php _e('ATR Posts by Cat', $this->textdomain);?></h2>
 	  	<p><?php _e('The plugin options.', $this->textdomain);?></p>
 
 		<!-- Tab navigation starts -->
