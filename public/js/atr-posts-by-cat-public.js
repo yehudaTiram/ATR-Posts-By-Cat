@@ -34,9 +34,10 @@
 		});
 	};
 	$(document).ready(function () {
-		$(function () {
+		// Wait 2 secoonds before scroll
+		setTimeout(function() {
 			$("#ma-kore ul.atr-posts-by-cat-list").liScroll();
-		});
+		}, 2000);
 	});
 
 
